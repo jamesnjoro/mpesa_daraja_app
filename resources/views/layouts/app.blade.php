@@ -76,5 +76,10 @@
             @yield('content')
         </main>
     </div>
+    <footer class="page-footer font-small blue">
+        <div class="footer-copyright text-center py-3">© {{ now()->year }} Copyright:
+            <a href="https://ratemyservice.co.ke/" target="_blank"> Custometrix Limited</a>
+        </div>
+    </footer>
 </body>
 </html>

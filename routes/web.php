@@ -16,3 +16,10 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::middleware(['auth'])->group(function () {
+   Route::post('/getAuthToken','TransactionController@getAuthenticationToken');
+   Route::post('/registerURL','TransactionController@registerUrl');
+});
+
+Route::any('/validateTrans', 'TransactionController@validationUrl')->name('validationURL');
+Route::any('/confirmTrans', 'TransactionController@confirmationUrl')->name('confirmationURL');
