@@ -42,6 +42,18 @@ class TransactionController extends Controller
         \Log::info($request->all());
         if(isset($request->TransID)){
             Transaction::create($request->all());
+            try{
+                $response = Http::withHeaders([
+                        'Content-Type' => 'application/json',
+                    ])
+                    ->post(env('ratemyservice_url'),[
+                        'apikey'=>env('ratemyservice_apiKey'),
+                        'profileId'=> env('ratemyservice_profileID'),
+                        'name'=> $request->FirstName.' '.$request->LastName,
+                        'number'=>$request->MSISDN
+                    ]);
+
+            }catch (\Exception $e){\Log::info($e);}
         }
         return response()->json([
             'ResponseCode'=>'0',
