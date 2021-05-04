@@ -6,6 +6,9 @@
 
 require('./bootstrap');
 import apiForm from './components/apiForm.vue';
+import approveStatus from './components/approvedStatus.vue';
+import users from './components/users.vue';
+import transactions from './components/transactions.vue';
 
 window.Vue = require('vue');
 
@@ -22,6 +25,9 @@ window.Vue = require('vue');
 
 Vue.component('status', require('./components/status.vue').default);
 Vue.component('api-form', apiForm);
+Vue.component('approve-status',approveStatus);
+Vue.component('users',users);
+Vue.component('transactions',transactions);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

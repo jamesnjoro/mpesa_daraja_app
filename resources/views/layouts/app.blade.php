@@ -18,6 +18,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
     <div id="app">
@@ -32,10 +35,19 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
+                    @auth()
+                    <ul v-if="{{Auth::user()->role}} == 1" class="navbar-nav mr-auto ml-4">
+                        <li class="nav-item mr-2">
+                            <a class="nav-link btn btn-outline-success" href="{{ route('home') }}">Home</a>
+                        </li>
+                        <li class="nav-item mr-2">
+                            <a class="nav-link btn btn-outline-success" href="{{ route('users') }}">Users</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link btn btn-outline-success" href="{{ route('transactions') }}">Transactions</a>
+                        </li>
                     </ul>
-
+                @endauth
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
@@ -81,5 +93,6 @@
             <a href="https://ratemyservice.co.ke/" target="_blank"> Custometrix Limited</a>
         </div>
     </footer>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 </body>
 </html>

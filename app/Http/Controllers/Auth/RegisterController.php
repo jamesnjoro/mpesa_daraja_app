@@ -70,9 +70,8 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password'])
         ];
-        \Log::info(['numbers'=>$users == 0]);
         if($users == 0){
-           $userDetails = 
+           $userDetails =
             [
                 'name' => $data['name'],
                 'email' => $data['email'],
@@ -80,7 +79,7 @@ class RegisterController extends Controller
                 'approved' => 1,
                 'role' =>1
             ];
-           
+
         }
         return User::create($userDetails);
     }

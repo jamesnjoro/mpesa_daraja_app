@@ -3,22 +3,46 @@
 namespace App\Http\Controllers;
 
 use App\Setting;
+use App\Transaction;
+use App\User;
+use Carbon\Carbon;
 use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Http;
+use Yajra\DataTables\DataTables;
+
 
 class TransactionController extends Controller
 {
-
+    public function index(Request $request){
+        if ($request->ajax()) {
+            $data = Transaction::latest()->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('name', function($row){
+                    return $row->FirstName.$row->LastName;
+                })
+                ->addColumn('date', function($row){
+                    return Carbon::createFromFormat('Y-m-d H:i:s', $row->created_at)->format('Y-m-d H:i');
+                })
+                ->rawColumns(['name','date'])
+                ->make(true);
+        }
+        return view('transactions');
+    }
     public function validationUrl(){
         return response()->json([
             'ResponseCode'=>'0',
             'ResponseDesc'=>'Validation successful'
         ]);
     }
-    public function confirmationUrl(){
+    public function confirmationUrl(Request $request){
+        \Log::info($request->all());
+        if(isset($request->TransID)){
+            Transaction::create($request->all());
+        }
         return response()->json([
             'ResponseCode'=>'0',
             'ResponseDesc'=>'Confirmation successful.'

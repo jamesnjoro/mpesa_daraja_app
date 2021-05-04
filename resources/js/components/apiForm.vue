@@ -18,7 +18,7 @@
         </div>
         <div class="form-group">
             <label for="shortcode">Shortcode</label>
-            <input type="shortcode" v-model="shortcode" class="form-control" id="shortcode" placeholder="shortcode" required>
+            <input type="shortcode" v-model="shortcode" class="form-control" id="shortcode" placeholder="Shortcode" required>
         </div>
         <div class="form-group">
             <label for="authenticationUrl">Authentication URL</label>

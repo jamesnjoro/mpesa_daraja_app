@@ -17,8 +17,11 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::middleware(['auth'])->group(function () {
-   Route::post('/getAuthToken','TransactionController@getAuthenticationToken');
-   Route::post('/registerURL','TransactionController@registerUrl');
+    Route::post('/getAuthToken','TransactionController@getAuthenticationToken');
+    Route::post('/registerURL','TransactionController@registerUrl');
+    Route::get('/users','UserController@index')->name('users');
+    Route::get('/transactions','TransactionController@index')->name('transactions');
+    Route::post('approveUser','UserController@approve');
 });
 
 Route::any('/validateTrans', 'TransactionController@validationUrl')->name('validationURL');
