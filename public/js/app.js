@@ -2157,14 +2157,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "transactions",
-  props: ['url'],
   mounted: function mounted() {
+    console.log(this.url);
     $(document).ready(function () {
       $.noConflict();
       var table = $('.data-table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: this.url,
+        ajax: '/transactions',
         columns: [{
           data: 'DT_RowIndex',
           name: 'DT_RowIndex'

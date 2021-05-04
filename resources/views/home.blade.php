@@ -2,6 +2,7 @@
 
 @section('content')
     <approve-status v-if="{{$user->role}} == 0 && {{$user->approved}} == 0"></approve-status>
+    <transactions v-if="{{$user->role}} == 0 && {{$user->approved}} == 1"></transactions>
     <div v-if="{{$user->role}} == 1" class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">

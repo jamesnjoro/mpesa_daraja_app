@@ -22,14 +22,14 @@
 <script>
 export default {
     name: "transactions",
-    props:['url'],
     mounted() {
+        console.log(this.url)
         $(document).ready(function () {
             $.noConflict();
             var table = $('.data-table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: this.url,
+                ajax: '/transactions',
                 columns: [
                     {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                     {data: 'name', name: 'Name', searchable: true},
