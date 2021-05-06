@@ -32,10 +32,11 @@ class TransactionController extends Controller
         }
         return view('transactions');
     }
-    public function validationUrl(){
+    public function validationUrl(Request $request){
+        \Log::info($request->all());
         return response()->json([
-            'ResponseCode'=>'0',
-            'ResponseDesc'=>'Validation successful'
+            'ResultCode'=>'0',
+            'ResultDesc'=>'Validation successful'
         ]);
     }
     public function confirmationUrl(Request $request){
@@ -43,21 +44,23 @@ class TransactionController extends Controller
         if(isset($request->TransID)){
             Transaction::create($request->all());
             try{
+                $firstname = isset($request->FirstName)?$request->FirstName:"";
+                $secondName = isset($request->SecondName)?$request->SecondName:"";
                 $response = Http::withHeaders([
                         'Content-Type' => 'application/json',
                     ])
                     ->post(env('ratemyservice_url'),[
                         'apikey'=>env('ratemyservice_apiKey'),
                         'profileId'=> env('ratemyservice_profileID'),
-                        'name'=> $request->FirstName.' '.$request->LastName,
+                        'name'=> $firstname.' '.$secondName,
                         'number'=>$request->MSISDN
                     ]);
 
             }catch (\Exception $e){\Log::info($e);}
         }
         return response()->json([
-            'ResponseCode'=>'0',
-            'ResponseDesc'=>'Confirmation successful.'
+            'ResultCode'=>'0',
+            'ResultDesc'=>'Validation successful'
         ]);
     }
     public function getAuthenticationToken(Request $request){
